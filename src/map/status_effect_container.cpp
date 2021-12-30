@@ -1051,7 +1051,6 @@ bool CStatusEffectContainer::ApplyCorsairEffect(CStatusEffect* PStatusEffect, ui
     {
         PStatusEffect->SetSlot(GetLowestFreeSlot());
         AddStatusEffect(PStatusEffect, true);
-        return true;
     }
     else
     {
@@ -1059,10 +1058,9 @@ bool CStatusEffectContainer::ApplyCorsairEffect(CStatusEffect* PStatusEffect, ui
         PStatusEffect->SetSlot(oldestRoll->GetSlot());
         DelStatusEffect(oldestRoll->GetStatusID());
         AddStatusEffect(PStatusEffect);
-        return true;
     }
 
-    return false;
+    return true;
 }
 
 bool CStatusEffectContainer::HasCorsairEffect(uint32 charid)

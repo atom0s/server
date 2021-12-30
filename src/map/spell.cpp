@@ -434,9 +434,9 @@ namespace spell
         {
             while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
             {
-                char*   contentTag;
-                CSpell* PSpell = nullptr;
-                SpellID id     = (SpellID)Sql_GetUIntData(SqlHandle, 0);
+                char*   contentTag = nullptr;
+                CSpell* PSpell     = nullptr;
+                SpellID id         = static_cast<SpellID>(Sql_GetUIntData(SqlHandle, 0));
 
                 if ((SPELLGROUP)Sql_GetIntData(SqlHandle, 3) == SPELLGROUP_BLUE)
                 {
@@ -550,7 +550,7 @@ namespace spell
         {
             while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
             {
-                char* contentTag;
+                char* contentTag = nullptr;
                 Sql_GetData(SqlHandle, 7, &contentTag, nullptr);
 
                 if (!luautils::IsContentEnabled(contentTag))
@@ -601,7 +601,7 @@ namespace spell
         {
             while (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
             {
-                char* contentTag;
+                char* contentTag = nullptr;
                 Sql_GetData(SqlHandle, 2, &contentTag, nullptr);
 
                 if (!luautils::IsContentEnabled(contentTag))
