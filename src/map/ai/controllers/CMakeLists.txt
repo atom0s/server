@@ -20,5 +20,5 @@ target_link_libraries(ai_controllers
     PUBLIC
     common
     project_options
-    #project_warnings
+    project_warnings
 )
