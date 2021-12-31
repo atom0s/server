@@ -2807,9 +2807,6 @@ bool CLuaBaseEntity::hasTeleport(uint8 tType, uint8 bit, sol::object const& arg2
             ShowError("LuaBaseEntity::hasTeleport : Parameter 1 out of bounds.");
             return false;
     }
-
-    XI_DEBUG_BREAK_IF(true); // We should never get here
-    return false;
 }
 
 /************************************************************************
@@ -8147,8 +8144,6 @@ sol::table CLuaBaseEntity::getParty()
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
-    CParty* party = static_cast<CBattleEntity*>(m_PBaseEntity)->PParty;
-
     auto table = luautils::lua.create_table();
     ((CBattleEntity*)m_PBaseEntity)->ForParty([&table](CBattleEntity* member) {
         table.add(CLuaBaseEntity(member));
@@ -8167,8 +8162,6 @@ sol::table CLuaBaseEntity::getParty()
 sol::table CLuaBaseEntity::getPartyWithTrusts()
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    CParty* party = static_cast<CCharEntity*>(m_PBaseEntity)->PParty;
 
     auto table = luautils::lua.create_table();
     ((CCharEntity*)m_PBaseEntity)->ForPartyWithTrusts([&table](CBattleEntity* member) {
@@ -10001,7 +9994,6 @@ bool CLuaBaseEntity::delStatusEffect(uint16 StatusID, sol::object const& SubID)
 
     bool result = false;
 
-    bool hasEffect       = false;
     auto effect_StatusID = static_cast<EFFECT>(StatusID);
 
     if (SubID != sol::lua_nil)
