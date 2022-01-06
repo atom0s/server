@@ -46,7 +46,7 @@ class HXIClient:
         if in_data[0] == 0x01:
             print('Login successful')
             self.account_id = util.unpack_uint16(in_data, 1)
-            print('Account ID: ' + str(self.account_id))
+            #print('Account ID: ' + str(self.account_id))
 
             # Connect
             self.lobby_data_connect()
@@ -191,7 +191,7 @@ class HXIClient:
             data = self.lobbyview_sock.recv(72) #0x48
             if len(data) != 0x48:
                 raise Exception(f"Did not get back 72 bytes. Got {len(data)}. => {data}")
-            status_code = util.unpack_uint16(data, 32)
+            #status_code = util.unpack_uint16(data, 32)
             #if status_code != 305 and status_code != 321:
             #    raise Exception("Did not get acceptable status code")
         except Exception as ex:
@@ -245,9 +245,9 @@ class HXIClient:
 
     def parse_incoming_packet(self, data):
         #print(f'recv: {data.hex()}')
-        server_packet_id = util.unpack_uint16(data, 0)
-        client_packet_id = util.unpack_uint16(data, 2)
-        packet_time = util.unpack_uint32(data, 8)
+        #server_packet_id = util.unpack_uint16(data, 0)
+        #client_packet_id = util.unpack_uint16(data, 2)
+        #packet_time = util.unpack_uint32(data, 8)
 
         # De-blowfish
 

@@ -138,7 +138,11 @@ player_data = [
 ]
 import_files = []
 backups = []
-database = host = port = login = password = None
+database = None
+host = None
+port = None
+login = None
+password = None
 db = cur = None
 repo = Repo('../')
 current_version = current_client = release_version = release_client = None

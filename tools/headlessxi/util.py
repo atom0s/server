@@ -42,6 +42,7 @@ class util:
     def pack_32(data):
         return struct.pack('<I', data)
 
+    @staticmethod
     def int_to_ip(ip):
         return '.'.join([str((ip >> 8 * i) % 256) for i in [3, 2, 1, 0]])
 
