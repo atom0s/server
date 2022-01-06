@@ -128,22 +128,22 @@ else()
     set(resource "${CMAKE_SOURCE_DIR}/res/gameserver.rc")
 endif()
 
-add_executable(xi_game
+add_executable(xi_zone
     ${SOURCES}
     ${resource})
 
 if(WIN32)
-    set_target_properties(xi_game PROPERTIES OUTPUT_NAME xi_game)
+    set_target_properties(xi_zone PROPERTIES OUTPUT_NAME xi_zone)
 endif()
 
 target_compile_definitions(
-    xi_game
+    xi_zone
     PUBLIC
     -DdsUDPSERV
     -DDEBUGLOGMAP
 )
 
-target_link_libraries(xi_game
+target_link_libraries(xi_zone
     PUBLIC
     sol2_single
     common
@@ -160,8 +160,8 @@ target_link_libraries(xi_game
 )
 
 if(TRACY_ENABLE)
-    target_link_libraries(xi_game PUBLIC tracy_client)
+    target_link_libraries(xi_zone PUBLIC tracy_client)
 endif(TRACY_ENABLE)
 
-set_target_output_directory(xi_game)
-set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT xi_game)
+set_target_output_directory(xi_zone)
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT xi_zone)

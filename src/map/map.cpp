@@ -275,7 +275,7 @@ int32 do_init(int32 argc, char** argv)
 
     luautils::EnableFilewatcher();
 
-    ShowStatus("The map-server is ready to work...");
+    ShowStatus("The zone-server is ready to work...");
     ShowMessage("=======================================================================");
     return 0;
 }
@@ -963,18 +963,18 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
 
 /************************************************************************
  *                                                                       *
- *  Map-Server Version Screen [venom]                                    *
+ *  zone-server Version Screen [venom]                                    *
  *                                                                       *
  ************************************************************************/
 
 void map_helpscreen(int32 flag)
 {
-    ShowMessage("Usage: map-server [options]");
+    ShowMessage("Usage: zone-server [options]");
     ShowMessage("Options:");
     ShowMessage("  Commands\t\t\tDescription");
     ShowMessage("-----------------------------------------------------------------------------");
     ShowMessage("  --help, --h, --?, /?     Displays this help screen");
-    ShowMessage("  --map-config <file>      Load map-server configuration from <file>");
+    ShowMessage("  --map-config <file>      Load zone-server configuration from <file>");
     ShowMessage("  --version, --v, -v, /v   Displays the server's version");
     ShowMessage("");
     if (flag)
@@ -985,7 +985,7 @@ void map_helpscreen(int32 flag)
 
 /************************************************************************
  *                                                                       *
- *  Map-Server Version Screen [venom]                                    *
+ *  zone-server Version Screen [venom]                                    *
  *                                                                       *
  ************************************************************************/
 
@@ -1112,7 +1112,7 @@ int32 map_config_from_env()
 
 /************************************************************************
  *                                                                       *
- *  Map-Server Config [venom]                                            *
+ *  zone-server Config [venom]                                            *
  *                                                                       *
  ************************************************************************/
 
@@ -1582,9 +1582,9 @@ void log_init(int argc, char** argv)
     std::string logFile;
 #ifdef DEBUGLOGMAP
 #ifdef WIN32
-    logFile = "log\\map-server.log";
+    logFile = "log\\zone-server.log";
 #else
-    logFile = "log/map-server.log";
+    logFile = "log/zone-server.log";
 #endif
 #endif
     bool defaultname = true;
