@@ -456,11 +456,9 @@ namespace luautils
         TracyZoneScoped;
 
         std::string outString;
-        for (int i = 0; i < va.size(); ++i)
+        for (auto const& entry : va)
         {
-            auto entry = luaToString(va[i]);
-            // TODO: Use fmt::join if we ever update fmt
-            outString += fmt::format("{} ", entry);
+            outString += fmt::format("{} ", luaToString(entry));
         }
 
         ShowScript(fmt::format("{}", outString));
