@@ -42,8 +42,8 @@ target_link_libraries(common
     sol2_single
     efsw
     argparse
+    PRIVATE
     project_options
-    #PRIVATE
     project_warnings
 )
  
