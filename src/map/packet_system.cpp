@@ -28,6 +28,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../common/timer.h"
 #include "../common/utils.h"
 #include "../common/version.h"
+#include "../common/settings_manager.h"
 
 #include <cstring>
 #include <utility>
@@ -2069,7 +2070,8 @@ void SmallPacket0x04B(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (msg_language == 0x02)
     {
-        PChar->pushPacket(new CServerMessagePacket(map_config.server_message, msg_language, msg_timestamp, msg_offset));
+        auto serverMessage = SettingsManager::Get<std::string>(MainSettings::SERVER_MESSAGE);
+        PChar->pushPacket(new CServerMessagePacket(serverMessage, msg_language, msg_timestamp, msg_offset));
     }
 
     PChar->pushPacket(new CCharSyncPacket(PChar));
