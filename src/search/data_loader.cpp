@@ -20,24 +20,28 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 #include <cstring>
 
-#include "../common/mmo.h"
-#include "../common/logging.h"
-#include "../common/sql.h"
+#include "common/mmo.h"
+#include "common/logging.h"
+#include "common/sql.h"
+#include "common/settings_manager.h"
 
 #include <algorithm>
 
 #include "data_loader.h"
-#include "search.h"
+#include "search_server.h"
 
 CDataLoader::CDataLoader()
 {
     SqlHandle = Sql_Malloc();
-
-    //  ShowStatus("sqlhandle is allocating");
-    if (Sql_Connect(SqlHandle, search_config.mysql_login.c_str(), search_config.mysql_password.c_str(), search_config.mysql_host.c_str(),
-                    search_config.mysql_port, search_config.mysql_database.c_str()) == SQL_ERROR)
+    if (Sql_Connect(SqlHandle,
+        SettingsManager::Get<std::string>(SqlSettings::LOGIN).c_str(),
+        SettingsManager::Get<std::string>(SqlSettings::PASSWORD).c_str(),
+        SettingsManager::Get<std::string>(SqlSettings::HOST).c_str(),
+        SettingsManager::Get<uint32>(SqlSettings::PORT),
+        SettingsManager::Get<std::string>(SqlSettings::DATABASE).c_str()) == SQL_ERROR)
     {
-        ShowError("cant connect");
+        ShowFatalError("Could not connect to SQL database");
+        std::exit(-1);
     }
 }
 

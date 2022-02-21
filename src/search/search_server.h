@@ -19,7 +19,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "../common/cbasetypes.h"
+#pragma once
+
+#include "common/application.h"
 
 struct search_config_t
 {
@@ -54,4 +56,13 @@ struct search_req
     uint8    commentType;
 };
 
-extern search_config_t search_config;
+struct SearchCommInfo
+{
+    SOCKET socket;
+    uint32 ip;
+    uint16 port;
+};
+
+class SearchServer final : public Application
+{
+};
