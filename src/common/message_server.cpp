@@ -23,7 +23,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <queue>
 
 #include "../common/logging.h"
-#include "login.h"
 #include "message_server.h"
 
 zmq::context_t             zContext;
@@ -276,11 +275,11 @@ void message_server_init()
 {
     ChatSqlHandle = Sql_Malloc();
 
-    if (Sql_Connect(ChatSqlHandle, login_config.mysql_login.c_str(), login_config.mysql_password.c_str(), login_config.mysql_host.c_str(),
-                    login_config.mysql_port, login_config.mysql_database.c_str()) == SQL_ERROR)
-    {
-        exit(EXIT_FAILURE);
-    }
+    //if (Sql_Connect(ChatSqlHandle, login_config.mysql_login.c_str(), login_config.mysql_password.c_str(), login_config.mysql_host.c_str(),
+    //                login_config.mysql_port, login_config.mysql_database.c_str()) == SQL_ERROR)
+    //{
+    //    exit(EXIT_FAILURE);
+    //}
 
     Sql_Keepalive(ChatSqlHandle, "MessageKeepalive");
 
@@ -291,9 +290,9 @@ void message_server_init()
     zSocket->setsockopt(ZMQ_RCVTIMEO, &to, sizeof to);
 
     string_t server = "tcp://";
-    server.append(login_config.msg_server_ip);
-    server.append(":");
-    server.append(std::to_string(login_config.msg_server_port));
+    //server.append(login_config.msg_server_ip);
+    //server.append(":");
+    //server.append(std::to_string(login_config.msg_server_port));
 
     try
     {

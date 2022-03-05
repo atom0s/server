@@ -766,6 +766,11 @@ namespace debug
             case 0xE06D7363: // Internal application exception code
                 return EXCEPTION_CONTINUE_SEARCH;
 
+            // https://docs.microsoft.com/en-us/windows/console/setconsolectrlhandler
+            // https://docs.microsoft.com/en-us/windows/console/registering-a-control-handler-function
+            case DBG_CONTROL_C:
+                return EXCEPTION_CONTINUE_SEARCH;
+
             default:
                 break;
         }
