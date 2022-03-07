@@ -19,24 +19,53 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "../common/cbasetypes.h"
-#include "../common/mmo.h"
-#include "../common/socket.h"
-#include "../common/sql.h"
-#include "../common/zmq.hpp"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
+#include "common/socket.h"
+#include "common/sql.h"
+
+#include <zmq.hpp>
 
 class CBasicPacket;
 
 struct chat_message_t
 {
-    zmq::message_t* type;
-    zmq::message_t* data;
-    zmq::message_t* packet;
+    zmq::message_t type;
+    zmq::message_t data;
+    zmq::message_t packet;
+
+    chat_message_t() noexcept
+    {
+    }
+
+    chat_message_t& operator=(chat_message_t&& other) noexcept
+    {
+        this->type.move(other.type);
+        this->packet.move(other.packet);
+        this->data.move(other.data);
+        return *this;
+    }
+
+    chat_message_t(chat_message_t const& other) noexcept
+    {
+        // TODO: ZMQ doesn't like this
+        // this->type.copy(*other.type);
+        // this->packet.copy(*other.packet);
+        // this->data.copy(*other.data);
+    }
+
+    chat_message_t(chat_message_t&& other) noexcept
+    : type(std::move(other.type))
+    , data(std::move(other.data))
+    , packet(std::move(other.packet))
+    {
+    }
 };
 
 namespace message
 {
     void init(const char* chatIp, uint16 chatPort);
+    void handle_incoming();
     void send(MSGSERVTYPE type, void* data, size_t datalen, CBasicPacket* packet);
     void close();
 }; // namespace message
